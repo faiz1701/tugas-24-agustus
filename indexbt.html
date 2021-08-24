@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+      .container{
+        width: 1300px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+        <div class="mb-3, mt-4">
+            <label for="namasiswa" class="form-label">Nama Siswa</label>
+            <input type="text" placeholder="Masukan nama" class="form-control" id="txt_namasiswa">
+          </div> 
+
+           <div class="mb-3">
+            <label for="kelas" class="form-label">kelas</label>
+            <select id="txt_kelas" class="form-select">
+              <option value="X">X</option>
+              <option value="XI">XI</option>
+              <option value="XII">XII</option>
+            </select>
+           </div>
+
+          <div class="mb-3">
+            <label for="nisnsiswa" class="form-label">Nisn Siswa</label>
+            <input type="number" placeholder="Masukan NISN" class="form-control" id="txt_nisnsiswa">
+          </div>
+
+
+          <div class="mb-3">
+            <label for="jeniskelamin" class="form-label">kelas</label>
+            <select id="txt_jeniskelamin" class="form-select">
+              <option value="laki-laki">Laki-laki</option>
+              <option value="Perempuan">Perempuan</option>
+            </select>
+           </div>
+
+
+          <label for="alamat">Alamat</label>
+            <textarea class="form-control" placeholder="Masukan alamat anda di sisni." id="txt_alamat"></textarea>
+
+            <button class="btn btn-primary mt-4" onclick="add()">Simpan</button>
+
+
+
+
+            <table class="table mt-3">
+                <thead>
+                  <tr>
+                    <th scope="col">NO</th>
+                    <th scope="col">Nama Siswa</th>
+                    <th scope="col">kelas</th>
+                    <th scope="col">NISN Siswa</th>
+                    <th scope="col">Jenis Kelamin</th>
+                    <th scope="col">Alamat</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="tampildata">
+                 
+                </tbody>
+              </table>
+    </div>
+
+
+<script>
+    var namasiswa = ['aflah', 'andri']
+    var kelas = ['X', 'XII']
+    var alamat = ['jakarta', 'Depok']
+    var nisn = ['089364287', '748269862491']
+    var jk = ['Laki-laki', "Laki-laki"]
+
+    var tampil = document.getElementById('tampildata')
+
+    function showData() {
+        tampil.innerHTML = ""
+
+         for(i = 0; i<namasiswa.length; i++){
+             var nodata = i+1
+
+             tampil.innerHTML +=
+             "<tr>"+
+                    "<th>"+nodata+"</th>"+
+                    "<td>"+namasiswa[i]+"</td>"+
+                    "<td>"+kelas[i]+"</td>"+
+                    "<td>"+nisn[i]+"</td>"+
+                    "<td>"+jk[i]+"</td>"+
+                    "<td>"+alamat[i]+"</td>"+
+                    "<td>"+
+                        "<button class='btn btn-warning'onclick='editData("+i+")'>Edit</button>"+
+                        "<button class='btn btn-danger'onclick='deleteData("+i+")'>Hapus</button>"+
+                    "</td>"+
+                  "</tr>"
+          }
+          
+        
+  }
+
+    showData()
+
+    function add() {
+        var namabaru = document.getElementById('txt_namasiswa').value
+        var kelasbaru = document.getElementById('txt_kelas').value
+        var alamatbaru = document.getElementById('txt_alamat').value
+        var nisnbaru = document.getElementById('txt_nisnsiswa').value
+        var jenisbaru = document.getElementById('txt_jeniskelamin').value
+
+        namasiswa.push(namabaru)
+        kelas.push(kelasbaru)
+        alamat.push(alamatbaru)
+        nisn.push(nisnbaru)
+        jk.push(jenisbaru)
+
+        showData()
+    }
+
+
+    function deleteData(i) {
+
+        if (confirm("apakah yakin ingin menghapus ini?")) {
+          var hapusnama = document.getElementById('txt_namasiswa').value
+        var hapuskelas = document.getElementById('txt_kelas').value
+        var hapusalamat = document.getElementById('txt_alamat').value
+        var hapusnisn = document.getElementById('txt_nisnsiswa').value
+        var hapusjenis = document.getElementById('txt_jeniskelamin').value
+
+        namasiswa.splice(i,1)
+        kelas.splice(i,1)
+        alamat.splice(i,1)
+        nisn.splice(i,1)
+        jk.splice(i,1)
+          alert("anda berhasil menghapus data ini")
+        }else{
+          alert("anda tidak berhasil menghapus data ini")
+        }
+
+
+        showData()
+    }
+
+    function editData(id) {
+      if (confirm("apakah anda yakin akan mengedit data ini?")) {
+        var ubahnama = prompt("Mengganti Nama Anda",namasiswa[id])
+          namasiswa[id] = ubahnama;
+
+          var ubahnama = prompt("Mengganti Kelas Anda",kelas[id])
+          kelas[id] = ubahnama;
+
+          var ubahnama = prompt("Mengganti NISN Anda",nisn[id])
+          nisn[id] = ubahnama; 
+
+          var ubahnama = prompt("Mengganti jenis kelamin Anda",jk[id])
+          jk[id] = ubahnama; 
+
+          var ubahnama = prompt("Mengganti Alamat Anda",alamat[id])
+          alamat[id] = ubahnama; 
+      }else{
+        alert("anda gagal mengedit")
+      }
+
+          showData()
+        }
+</script>
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    
+  </body>
+</html>
